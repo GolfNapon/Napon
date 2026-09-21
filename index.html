@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAPON — Selected Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070a; --ink:#f4f4f2;
+  --c1:#ff2d6f; --c2:#00e5ff; --c3:#c6ff00; --c4:#7b2bff;
+  --line:rgba(255,255,255,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Space Grotesk',sans-serif;
+  overflow:hidden;cursor:none;
+}
+body.scrollable{overflow-y:auto;overflow-x:hidden}
+
+/* ---------- FX LAYERS ---------- */
+.aurora{position:fixed;inset:-20%;z-index:0;filter:blur(90px);opacity:.55;pointer-events:none}
+.blob{position:absolute;border-radius:50%;mix-blend-mode:screen}
+.b1{width:48vw;height:48vw;background:var(--c1);top:5%;left:2%;animation:f1 18s ease-in-out infinite}
+.b2{width:42vw;height:42vw;background:var(--c2);bottom:0%;right:5%;animation:f2 22s ease-in-out infinite}
+.b3{width:36vw;height:36vw;background:var(--c4);top:35%;left:42%;animation:f3 26s ease-in-out infinite}
+@keyframes f1{50%{transform:translate(28vw,18vh) scale(1.25)}}
+@keyframes f2{50%{transform:translate(-24vw,-16vh) scale(1.3)}}
+@keyframes f3{50%{transform:translate(-18vw,22vh) scale(.8)}}
+
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.20;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='.6'/></svg>");
+  animation:grain .5s steps(2) infinite}
+@keyframes grain{50%{transform:translate(-4%,3%)}}
+
+.scan{position:fixed;inset:0;z-index:59;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.35) 3px 4px)}
+
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:70px 70px;mask-image:radial-gradient(circle at 50% 40%,#000 10%,transparent 78%)}
+
+/* ---------- CURSOR ---------- */
+.cur{position:fixed;z-index:99;pointer-events:none;border-radius:50%;
+  mix-blend-mode:difference;background:#fff;width:12px;height:12px;
+  transform:translate(-50%,-50%);transition:width .25s,height .25s}
+.cur-ring{position:fixed;z-index:99;pointer-events:none;width:44px;height:44px;
+  border:1px solid rgba(255,255,255,.5);border-radius:50%;transform:translate(-50%,-50%);
+  transition:transform .18s ease-out,width .25s,height .25s,border-color .25s}
+body.hot .cur-ring{width:80px;height:80px;border-color:var(--c3)}
+
+/* ---------- PAGE 1 : LANDING ---------- */
+#landing{position:fixed;inset:0;z-index:20;display:grid;place-items:center;text-align:center;
+  transition:opacity .7s ease,transform .9s cubic-bezier(.76,0,.24,1)}
+#landing.gone{opacity:0;transform:scale(1.6) rotate(-3deg);pointer-events:none}
+
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.55em;
+  text-transform:uppercase;color:var(--c2);margin-bottom:1.4rem}
+.name{font-family:'Archivo Black',sans-serif;font-size:clamp(3.4rem,15vw,12rem);
+  line-height:.82;letter-spacing:-.04em;position:relative;display:inline-block;
+  text-transform:uppercase}
+.name span{display:block}
+.name::before,.name::after{content:attr(data-txt);position:absolute;inset:0;white-space:pre}
+.name::before{color:var(--c1);animation:gl1 3.4s infinite steps(1)}
+.name::after{color:var(--c2);animation:gl2 2.7s infinite steps(1)}
+@keyframes gl1{0%,92%{clip-path:inset(100% 0 0 0);transform:none}
+ 93%{clip-path:inset(12% 0 62% 0);transform:translate(-8px,0)}
+ 96%{clip-path:inset(58% 0 18% 0);transform:translate(7px,0)}98%{clip-path:inset(100% 0 0 0)}}
+@keyframes gl2{0%,88%{clip-path:inset(100% 0 0 0);transform:none}
+ 89%{clip-path:inset(40% 0 35% 0);transform:translate(9px,2px)}
+ 94%{clip-path:inset(72% 0 8% 0);transform:translate(-6px,-2px)}97%{clip-path:inset(100% 0 0 0)}}
+
+.subline{margin-top:1.8rem;font-size:clamp(.8rem,1.5vw,1.05rem);letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(255,255,255,.62)}
+.enter{margin-top:3rem;display:inline-flex;align-items:center;gap:.9rem;
+  padding:1rem 2.4rem;border:1px solid var(--line);border-radius:999px;
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.35em;
+  text-transform:uppercase;background:rgba(255,255,255,.04);backdrop-filter:blur(8px);
+  transition:.3s}
+.enter:hover{background:var(--c3);color:#000;border-color:var(--c3);letter-spacing:.5em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--c3);animation:pulse 1.4s infinite}
+.enter:hover .dot{background:#000}
+@keyframes pulse{50%{opacity:.15;transform:scale(1.8)}}
+
+.marquee{position:fixed;bottom:0;left:0;width:100%;z-index:21;overflow:hidden;
+  border-top:1px solid var(--line);background:rgba(0,0,0,.4);padding:.7rem 0}
+.mq-track{display:flex;white-space:nowrap;animation:mq 26s linear infinite;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.35em;text-transform:uppercase}
+.mq-track span{padding:0 2rem;color:rgba(255,255,255,.55)}
+.mq-track span b{color:var(--c3)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- PAGE 2 : WORKS ---------- */
+#works{position:relative;z-index:10;opacity:0;pointer-events:none;
+  transition:opacity .8s .25s ease;padding:5vh 5vw 12vh}
+#works.on{opacity:1;pointer-events:auto}
+
+.top{display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:1.4rem;border-bottom:1px solid var(--line);padding-bottom:1.6rem;margin-bottom:3.4rem}
+.top h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2.2rem,7vw,5.2rem);
+  line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+.top h2 em{font-style:normal;-webkit-text-stroke:1.5px var(--c3);color:transparent}
+.back{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.3em;
+  text-transform:uppercase;border:1px solid var(--line);padding:.75rem 1.4rem;border-radius:999px;transition:.3s}
+.back:hover{background:var(--c2);color:#000;border-color:var(--c2)}
+
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1.1rem}
+.card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;
+  background:rgba(255,255,255,.035);backdrop-filter:blur(10px);padding:1.7rem;
+  min-height:230px;display:flex;flex-direction:column;justify-content:space-between;
+  text-decoration:none;color:inherit;isolation:isolate;
+  opacity:0;transform:translateY(38px);transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .35s,background .35s}
+.card.in{opacity:1;transform:translateY(0)}
+.card:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.07)}
+.card::before{content:'';position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;
+  background:radial-gradient(400px circle at var(--mx) var(--my),rgba(255,255,255,.16),transparent 60%)}
+.card:hover::before{opacity:1}
+
+/* sizes */
+.s-wide{grid-column:span 4}
+.s-tall{grid-column:span 2;grid-row:span 2}
+.s-mid{grid-column:span 3}
+.s-sm{grid-column:span 2}
+
+.num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.3em;color:rgba(255,255,255,.4)}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  letter-spacing:.22em;text-transform:uppercase;padding:.32rem .7rem;border-radius:99px;
+  border:1px solid currentColor;margin-bottom:.9rem}
+.card h3{font-family:'Archivo Black',sans-serif;font-size:1.35rem;line-height:1.05;
+  letter-spacing:-.02em;text-transform:uppercase;margin-bottom:.55rem}
+.card p{font-size:.85rem;line-height:1.55;color:rgba(255,255,255,.62);max-width:44ch}
+.go{margin-top:1.2rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+  letter-spacing:.28em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem}
+.go i{font-style:normal;transition:transform .35s}
+.card:hover .go i{transform:translateX(9px)}
+
+/* decorative graphic shapes per card */
+.deco{position:absolute;pointer-events:none;opacity:.55;transition:transform .8s ease,opacity .4s}
+.card:hover .deco{transform:scale(1.2) rotate(18deg);opacity:.85}
+.d-ring{width:200px;height:200px;border-radius:50%;border:28px solid var(--c2);right:-70px;bottom:-70px;filter:blur(1px)}
+.d-tri{width:0;height:0;border-left:90px solid transparent;border-right:90px solid transparent;
+  border-bottom:150px solid var(--c1);right:-30px;top:-30px}
+.d-bars{right:18px;bottom:18px;display:flex;gap:7px;align-items:flex-end}
+.d-bars i{display:block;width:12px;background:var(--c3)}
+.d-sq{width:150px;height:150px;background:var(--c4);right:-40px;bottom:-40px;transform:rotate(24deg)}
+.d-dots{inset:auto -20px -20px auto;width:180px;height:180px;
+  background-image:radial-gradient(var(--c3) 2.2px,transparent 2.3px);background-size:16px 16px}
+.d-cross{right:20px;top:20px;width:110px;height:110px;
+  background:linear-gradient(var(--c1) 0 0) center/100% 16px no-repeat,
+             linear-gradient(var(--c1) 0 0) center/16px 100% no-repeat;transform:rotate(45deg)}
+.d-wave{right:-10px;bottom:-10px;width:190px;height:120px;
+  background:repeating-linear-gradient(-45deg,var(--c2) 0 8px,transparent 8px 20px)}
+
+.foot{margin-top:4rem;border-top:1px solid var(--line);padding-top:1.6rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(255,255,255,.35);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+@media(max-width:900px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .s-wide,.s-mid,.s-tall,.s-sm{grid-column:span 2;grid-row:auto}
+  body{cursor:auto}.cur,.cur-ring{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grid-bg"></div>
+<div class="scan"></div>
+<div class="grain"></div>
+<div class="cur"></div><div class="cur-ring"></div>
+
+<!-- ============ PAGE 1 ============ -->
+<section id="landing">
+  <div>
+    <p class="kicker">Web Designer &amp; Front-End Developer</p>
+    <h1 class="name" data-txt="NAPON"><span>NAPON</span></h1>
+    <p class="subline">Selected Works · 2024 — 2025</p>
+    <div class="enter" id="enterBtn"><span class="dot"></span> Click to enter</div>
+  </div>
+</section>
+
+<div class="marquee" id="mq">
+  <div class="mq-track">
+    <span>Creative Coding <b>✦</b></span><span>UI / UX <b>✦</b></span><span>Interactive Web <b>✦</b></span>
+    <span>Motion Graphic <b>✦</b></span><span>7 Projects <b>✦</b></span>
+    <span>Creative Coding <b>✦</b></span><span>UI / UX <b>✦</b></span><span>Interactive Web <b>✦</b></span>
+    <span>Motion Graphic <b>✦</b></span><span>7 Projects <b>✦</b></span>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<main id="works">
+  <div class="top">
+    <h2>The<br><em>Archive</em></h2>
+    <div class="back" id="backBtn">← Back to home</div>
+  </div>
+
+  <div class="bento">
+
+    <a class="card s-wide" href="https://sites.google.com/northbkk.ac.th/cyber-safe/home" target="_blank" rel="noopener">
+      <div class="deco d-ring"></div>
+      <div class="num">01 / SECURITY</div>
+      <div>
+        <span class="tag" style="color:var(--c2)">Google Sites</span>
+        <h3>Cyber Safe</h3>
+        <p>เว็บให้ความรู้ด้านความปลอดภัยไซเบอร์สำหรับนักศึกษา รวมเนื้อหาการป้องกันภัยออนไลน์ การตั้งรหัสผ่าน และการรู้เท่าทันมิจฉาชีพดิจิทัล</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-tall" href="https://golfnapon.github.io/GameDesignbyNapon/" target="_blank" rel="noopener">
+      <div class="deco d-dots"></div>
+      <div class="num">05 / PLAY</div>
+      <div>
+        <span class="tag" style="color:var(--c3)">Game Design</span>
+        <h3>Game Design<br>by Napon</h3>
+        <p>พอร์ตโฟลิโอรวมผลงานออกแบบเกม ตั้งแต่แนวคิด กลไกการเล่น ไปจนถึงงานอาร์ตและ UI ในเกม นำเสนอแบบ interactive</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-sm" href="https://golfnapon.github.io/BMI/" target="_blank" rel="noopener">
+      <div class="deco d-bars"><i style="height:34px"></i><i style="height:60px"></i><i style="height:22px"></i><i style="height:48px"></i></div>
+      <div class="num">03 / TOOL</div>
+      <div>
+        <span class="tag" style="color:var(--c3)">Web App</span>
+        <h3>BMI Calculator</h3>
+        <p>เครื่องคำนวณดัชนีมวลกาย พร้อมแปลผลเกณฑ์สุขภาพแบบเรียลไทม์</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-mid" href="https://golfnapon.github.io/openhouse/" target="_blank" rel="noopener">
+      <div class="deco d-tri"></div>
+      <div class="num">02 / EVENT</div>
+      <div>
+        <span class="tag" style="color:var(--c1)">Landing Page</span>
+        <h3>Open House</h3>
+        <p>เว็บประชาสัมพันธ์งานเปิดบ้านวิชาการ รวมกำหนดการ กิจกรรม และช่องทางลงทะเบียน ดีไซน์สดใสอ่านง่ายบนมือถือ</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-mid" href="https://golfnapon.github.io/TAMSANG-LAB/" target="_blank" rel="noopener">
+      <div class="deco d-sq"></div>
+      <div class="num">04 / SYSTEM</div>
+      <div>
+        <span class="tag" style="color:var(--c4)">Interactive</span>
+        <h3>Tamsang Lab</h3>
+        <p>เว็บแอปสไตล์ “ตามสั่ง” ให้ผู้ใช้เลือกรายการจากเมนู แล้วระบบประมวลผลและสรุปผลลัพธ์ให้ทันที</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-mid" href="https://golfnapon.github.io/hospitalnavigator/" target="_blank" rel="noopener">
+      <div class="deco d-cross"></div>
+      <div class="num">06 / HEALTH</div>
+      <div>
+        <span class="tag" style="color:var(--c1)">Navigation</span>
+        <h3>Hospital Navigator</h3>
+        <p>ระบบช่วยนำทางผู้ป่วยภายในโรงพยาบาล ค้นหาแผนก จุดบริการ และเส้นทางการเดินได้อย่างรวดเร็ว</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="card s-mid" href="https://golfnapon.github.io/testimage/" target="_blank" rel="noopener">
+      <div class="deco d-wave"></div>
+      <div class="num">07 / LAB</div>
+      <div>
+        <span class="tag" style="color:var(--c2)">Experiment</span>
+        <h3>Test Image</h3>
+        <p>พื้นที่ทดลองงานภาพและเอฟเฟกต์บนเว็บ ทดสอบการแสดงผล การโหลด และการจัดวางรูปภาพในรูปแบบต่าง ๆ</p>
+        <div class="go">Visit site <i>→</i></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="foot"><span>© 2025 Napon</span><span>Designed &amp; Coded by Napon</span></div>
+</main>
+
+<script>
+/* cursor */
+const cur=document.querySelector('.cur'),ring=document.querySelector('.cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,.enter,.back').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hot'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hot'));
+});
+
+/* spotlight on cards */
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');});
+});
+
+/* page transition */
+const landing=document.getElementById('landing'),works=document.getElementById('works'),mq=document.getElementById('mq');
+function openWorks(){
+  landing.classList.add('gone');mq.style.opacity=0;
+  works.classList.add('on');document.body.classList.add('scrollable');
+  document.querySelectorAll('.card').forEach((c,i)=>setTimeout(()=>c.classList.add('in'),120*i+350));
+}
+function goHome(){
+  landing.classList.remove('gone');mq.style.opacity=1;
+  works.classList.remove('on');document.body.classList.remove('scrollable');
+  scrollTo(0,0);document.querySelectorAll('.card').forEach(c=>c.classList.remove('in'));
+}
+landing.addEventListener('click',openWorks);
+document.getElementById('backBtn').addEventListener('click',e=>{e.stopPropagation();goHome();});
+</script>
+</body>
+</html>
